@@ -1,3 +1,10 @@
+@value colors: "./colors.module.css";
+@value blue, red, green from colors;
+
+.primary{
+  color:blue
+}
+
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
