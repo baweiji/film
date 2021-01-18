@@ -16,6 +16,10 @@ a {
   box-sizing: border-box;
 }
 
+:root{
+  --swiper-theme-color:rgba(235,97,0)
+}
+
 
 .swiper-container{
   width:100vw;
@@ -28,4 +32,25 @@ a {
 
 .swiper-button-next{
   right:32px
+}
+
+.swiper-pagination-bullet{
+  background: #fff;
+  opacity: 1;
+  vertical-align: middle;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--swiper-theme-color);
+  width:16px;
+  height:16px;
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets{
+  right: 15%;
+  left: auto;
+  width: 100%;
+  text-align: right;
+  bottom:32px;
 }

@@ -3,7 +3,7 @@ import Head from 'next/head';
 // import { useRouter } from 'next/router';
 import Layout from '../layouts/basic';
 
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Autoplay, A11y } from 'swiper';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,12 +11,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from '../styles/index.module.css'
 
 // install Swiper components
-SwiperCore.use([Navigation, Pagination, A11y]);
+SwiperCore.use([Navigation, Pagination, Autoplay,A11y]);
 
 const Home = (props) => {
   return (
     <>
       <Swiper
+        autoplay={{delay:5000,disableOnInteraction:false}}
         navigation
         pagination={{ clickable: true }}
         onSlideChange={() => console.log('slide change')}

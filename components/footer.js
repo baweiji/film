@@ -28,7 +28,6 @@ function Footer() {
       <style jsx>{`
         .page-footer {
           width: 100%;
-          border-top: 1px solid #ccc;
           background: #fafafa;
         }
 
