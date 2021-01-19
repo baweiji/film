@@ -1,0 +1,54 @@
+.root{
+    text-align: center;
+    margin:0 auto;
+    border-bottom:1px solid #fff;
+    width: 100%;
+    height: 250px;
+}
+.title{
+ text-align: center;
+}
+
+.titleEN{
+    font-size: 24px;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.titleCN{
+    font-style: normal;
+    margin-top:16px;
+}
+
+.highlight{
+    color:#eb6100
+}
+
+.items{
+    display:flex;
+    flex-direction: row;
+    margin:48px 0 0 0;
+}
+
+.item{
+    flex:1;
+    font-style:normal;
+    font-size:14px;
+}
+
+.itemIcon{
+    color: #eb6100;
+    border: 2px solid #eb6100;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin: 0px auto;
+    border-radius: 50%;
+    padding-top: 6px;
+}
+
+.itemLabel{
+    margin:8px 0
+}
+
+.itemContent{}

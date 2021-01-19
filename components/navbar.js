@@ -6,7 +6,7 @@ import cn from 'classnames';
 const Logo = () => {
   return (
     <>
-      <Image src="/images/logo.png" width={341} height={70} title="Home" />
+      <img src="/images/logo.png" width={341} height={70} title="Home" />
     </>
   );
 };
@@ -58,7 +58,7 @@ const NormalNav = () => {
             <div className={'header-link-en-label'}>Home</div>
           </a>
         </Link>
-        <Link href="/equipments">
+        <Link href="/">
           <a
             className={cn('header-link', {
               selected: route.startsWith('/equipments'),
@@ -78,16 +78,16 @@ const NormalNav = () => {
             <div className={'header-link-en-label'}>About US</div>
           </a>
         </Link>
-        <Link href="/contact">
-          <a
-            className={cn('header-link', {
-              selected: route.startsWith('/contact'),
-            })}
-          >
-            <div>联系我们</div>
-            <div className={'header-link-en-label'}>Contact US</div>
-          </a>
-        </Link>
+
+        <a
+          className={cn('header-link', {
+            selected: route.startsWith('/contact'),
+          })}
+          href="#contact"
+        >
+          <div>联系我们</div>
+          <div className={'header-link-en-label'}>Contact US</div>
+        </a>
       </div>
       <style jsx>{`
         .links {
