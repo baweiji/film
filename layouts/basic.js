@@ -94,8 +94,6 @@ const Layout = ({ children, meta = {} }) => {
 
         @media only screen and (max-width: 767px) {
           .container {
-            //max-width: ${config.site.layouts.pageWidthMobile};
-            min-height: 100vh;
           }
         }
       `}</style>
@@ -103,7 +101,7 @@ const Layout = ({ children, meta = {} }) => {
   );
 };
 
-export default (Page) => {
+const FnBasicLayout = (Page) => {
   const BasicLayout = (props) => {
     const { user, title, auth } = props;
     const router = useRouter();
@@ -130,3 +128,6 @@ export default (Page) => {
 
   return BasicLayout;
 };
+
+
+export default FnBasicLayout

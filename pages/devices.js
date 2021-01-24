@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useWindowSize } from 'react-use'
 // import { Page, Text, Card, Note, Code, Spacer, Button, Grid } from '@geist-ui/react';
 // import { useRouter } from 'next/router';
@@ -16,14 +16,26 @@ const Slides = (height) => {
   if (height === Infinity)
     return null
 
-  const data = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.jpg', '8.jpg', '9.jpg', '10.png']
+  const data = [
+    { src: '1.png', size: 'auto' },
+    { src: '2.png', size: 'auto' },
+    { src: '3.png', size: 'auto' },
+    { src: '4.png', size: 'auto' },
+    { src: '5.png', size: 'auto' },
+    { src: '6.png', size: 'auto' },
+    { src: '7.jpg', size: 'contain' },
+    { src: '8.jpg', size: 'contain' },
+    { src: '9.jpg', size: 'contain' },
+    { src: '10.png', size: 'auto' }
+  ]
+
   return data.map(item => (
     <SwiperSlide>
-      <div className={{}} style={{
+      <div style={{
         width: '100%',
         height: height,
-        background: `url('/images/devices/${item}') no-repeat rgb(0, 0, 0)`,
-        backgroundSize: 'auto',
+        background: `url('/images/devices/${item.src}') no-repeat rgb(0, 0, 0)`,
+        backgroundSize: item.size,
         backgroundPosition: 'center'
       }}>
       </div>
@@ -44,7 +56,7 @@ const Home = (props) => {
       <Swiper
         width={width}
         height={slideHeight}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        // autoplay={{ delay: 5000, disableOnInteraction: false }}
         navigation
         pagination={{ clickable: true }}
         onSlideChange={() => console.log('slide change')}
