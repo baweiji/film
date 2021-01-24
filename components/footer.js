@@ -3,6 +3,7 @@ import MapPin from '@geist-ui/react-icons/mapPin'
 import Mail from '@geist-ui/react-icons/mail'
 import Smartphone from '@geist-ui/react-icons/smartphone'
 import styles from '../styles/contact.module.css'
+import { Row, Col, Grid } from '@geist-ui/react';
 
 function Copyright() {
   return (
@@ -34,23 +35,29 @@ function Contact() {
         <div className={styles.titleEN}><span>Contact</span>&nbsp;<span className={styles.highlight}>US</span></div>
         <div className={styles.titleCN}>联系我们</div>
       </div>
-      <div className={styles.items}>
-        <div className={styles.item}>
-          <div className={styles.itemIcon}><Smartphone /></div>
-          <div className={styles.itemLabel}>- 手机 -</div>
-          <div className={styles.itemContent}>13771196623</div>
-        </div>
-        <div className={styles.item}>
-          <div className={styles.itemIcon}><Mail /></div>
-          <div className={styles.itemLabel}>- 邮箱 -</div>
-          <div className={styles.itemContent}>xxxx@163.com</div>
-        </div>
-        <div className={styles.item}>
-          <div className={styles.itemIcon}><MapPin /></div>
-          <div className={styles.itemLabel}>- 地址 -</div>
-          <div className={styles.itemContent}>无锡市蠡湖大道2009号A3栋2114A-9</div>
-        </div>
-      </div>
+      <Grid.Container style={{margin:'48px 0 0 0'}}>
+        <Grid md="8" xs={24}>
+          <div className={styles.item}>
+            <div className={styles.itemIcon}><Smartphone /></div>
+            <div className={styles.itemLabel}>- 手机 -</div>
+            <div className={styles.itemContent}>13771196623</div>
+          </div>
+        </Grid>
+        <Grid md="8" xs={24}>
+          <div className={styles.item}>
+            <div className={styles.itemIcon}><Mail /></div>
+            <div className={styles.itemLabel}>- 邮箱 -</div>
+            <div className={styles.itemContent}>4043408@qq.com</div>
+          </div>
+        </Grid>
+        <Grid md="8" xs={24}>
+          <div className={styles.item}>
+            <div className={styles.itemIcon}><MapPin /></div>
+            <div className={styles.itemLabel}>- 地址 -</div>
+            <div className={styles.itemContent}>无锡市蠡湖大道2009号A3栋2114A-9</div>
+          </div>
+        </Grid>
+      </Grid.Container>
     </div>
   )
 }
@@ -72,8 +79,7 @@ function Footer() {
         .page-footer :global(.footer) {
           width: 70%;
           margin: 0 auto;
-          padding: 0 16pt;
-          height: 385px;
+          padding: 60px 16pt;
           display: flex;
           align-items: center;
         }

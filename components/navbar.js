@@ -58,7 +58,7 @@ const NormalNav = () => {
             <div className={'header-link-en-label'}>Home</div>
           </a>
         </Link>
-        <Link href="/">
+        <Link href="/devices">
           <a
             className={cn('header-link', {
               selected: route.startsWith('/equipments'),
