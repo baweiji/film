@@ -16,7 +16,7 @@ const RATIO = 2.35
 const data = [
   { title: '超群国际企业宣传片', src: 'chaoqun.jpg', video: 'https://v.qq.com/x/page/y3221gdtzz6.html' },
   { title: '无锡山水城抗疫纪录片', src: 'boyu.jpg', video: 'https://v.qq.com/x/page/l3221wd2625.html' },
-  { title: '海事局新中国周年纪录片', src: 'haishiju.jpg', video: 'https://v.qq.com/x/page/i3220btipa3.html' }
+  // { title: '海事局新中国周年纪录片', src: 'haishiju.jpg', video: 'https://v.qq.com/x/page/i3220btipa3.html' }
 ]
 
 const Slides = (height = 'auto') => {
@@ -52,11 +52,11 @@ const Home = (props) => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         autoHeight
         navigation
-        loop
+        //loop
         pagination={{ clickable: true }}
         onSlideChange={(swiper) => {
-          setTitle(data[(swiper.activeIndex - 1) % 3].title)
-          setPlayUrl(data[(swiper.activeIndex - 1) % 3].video)
+          setTitle(data[(swiper.activeIndex) % 2].title)
+          setPlayUrl(data[(swiper.activeIndex) % 2].video)
         }}
       // onSwiper={(swiper) => console.log(swiper)}
       >
