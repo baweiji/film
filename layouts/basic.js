@@ -39,7 +39,7 @@ const Layout = ({ children, meta = {} }) => {
       <LayoutHeader meta={meta} />
       <Header />
       <div className="container">{children}</div>
-      <Footer />
+      {/* <Footer /> */}
       <style jsx global>{`
         html {
           line-height: 1.15;

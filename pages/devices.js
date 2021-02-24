@@ -69,7 +69,7 @@ const Home = (props) => {
 };
 
 Home.getInitialProps = async (context) => {
-  return { title: '首页' };
+  return { title: '专业设备' };
 };
 
 export default Layout(Home);

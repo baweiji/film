@@ -58,7 +58,7 @@ const NormalNav = () => {
             <div className={'header-link-en-label'}>Home</div>
           </a>
         </Link>
-        <Link href="/devices">
+        {/* <Link href="/devices">
           <a
             className={cn('header-link', {
               selected: route.startsWith('/equipments'),
@@ -67,7 +67,7 @@ const NormalNav = () => {
             <div>设备</div>
             <div className={'header-link-en-label'}>Equipments</div>
           </a>
-        </Link>
+        </Link> */}
         <Link href="/about">
           <a
             className={cn('header-link', {
@@ -85,8 +85,8 @@ const NormalNav = () => {
           })}
           href="#contact"
         >
-          <div>联系我们</div>
-          <div className={'header-link-en-label'}>Contact US</div>
+          <div>联系电话: 13771196623</div>
+          <div className={'header-link-en-label'}>&nbsp;</div>
         </a>
       </div>
       <style jsx>{`
