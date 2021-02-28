@@ -1,12 +1,20 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Image } from '@geist-ui/react';
+import { Image, useMediaQuery } from '@geist-ui/react';
 import cn from 'classnames';
 
 const Logo = () => {
+  const upXS = useMediaQuery('sm', { match: 'up' })
+  const height = upXS ? 70 : 32
+  const padding = upXS ? 0 : 8
+
+  if (!process.browser) {
+    return <></>
+  }
+
   return (
     <>
-      <img src="/images/logo.png" width={341} height={70} title="Home" />
+      <img style={{ margin: padding }} src="/images/logo.png" width={'auto'} height={height} title="Home" />
     </>
   );
 };
@@ -79,15 +87,14 @@ const NormalNav = () => {
           </a>
         </Link>
 
-        <a
-          className={cn('header-link', {
-            selected: route.startsWith('/contact'),
-          })}
+        <span
+          className={cn('header-link')}
           href="#contact"
+          style={{ width: 100 }}
         >
           <div>联系电话: 13771196623</div>
-          <div className={'header-link-en-label'}>&nbsp;</div>
-        </a>
+          {/* <div className={'header-link-en-label'}>&nbsp;</div> */}
+        </span>
       </div>
       <style jsx>{`
         .links {
@@ -106,6 +113,7 @@ const NormalNav = () => {
           color: #bfbfbf;
           font-size:15px;
           text-align:center;
+          min-width:80px;
         }
         .header-link.selected {
           color:#eb6100
@@ -119,16 +127,17 @@ const NormalNav = () => {
 
         @media (max-width: 640px) {
           .logo {
-            display: none;
+            display: block;
           }
           .links {
-            height: 50px;
-          }
-          .login-section {
-            display: none;
+            height: auto;
+            flex-direction:column
           }
           .links-section {
+            width:100%;
             justify-content: space-between;
+            padding: 0 16px;
+            margin:12px 0;
           }
           .header-link {
             margin: 0;
@@ -149,6 +158,13 @@ const Navbar = () => {
           height: 126px;
           width: 70%;
           margin: 0 auto;
+        }
+
+        @media (max-width: 640px) {
+          .navbar {
+            height: auto;
+            width: 100%;
+          }
         }
       `}</style>
     </nav>

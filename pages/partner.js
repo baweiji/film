@@ -56,7 +56,7 @@ const Enterprises = ({ data }) => {
         {
           group.map((item, subIndex) => {
             return item.src &&
-              <Grid key={subIndex} md={4} xs={24}>
+              <Grid key={subIndex} lg={4} md={8} sm={8} xs={24}>
                 <Card hoverable >
                   <img src={"/images/enterprises/" + item.src}
                     height={item.height} style={{ objectFit: 'scale-down' }} />
@@ -71,7 +71,12 @@ const Enterprises = ({ data }) => {
 }
 
 const OtherEnterprises = () => {
+  const upLG = useMediaQuery('lg', { match: 'up' })
   const upMD = useMediaQuery('md', { match: 'up' })
+  const smMD = useMediaQuery('sm', { match: 'up' })
+
+  const className = upLG ? styles.groupItemLG :
+    upMD ? styles.groupItemMD : (smMD ? styles.groupItemSM : styles.groupItemXS)
 
   if (!process.browser) {
     return <div></div>
@@ -85,7 +90,7 @@ const OtherEnterprises = () => {
       <div className={styles.group}>
         {
           OTHER_ENTERPRISE_DATA.map((item, index) => (
-            <div key={index} className={upMD ? styles.groupItemMD : styles.groupItemXS}>
+            <div key={index} className={className}>
               <div className={styles.groupTitle}>{item.name}</div>
               <div>
                 {

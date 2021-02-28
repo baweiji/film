@@ -9,8 +9,18 @@
     
 }
 
+.groupItemLG{
+    flex-basis:25%;
+    margin-bottom:24px;
+}
+
 .groupItemMD{
     flex-basis:33.33%;
+    margin-bottom:24px;
+}
+
+.groupItemSM{
+    flex-basis:50%;
     margin-bottom:24px;
 }
 
