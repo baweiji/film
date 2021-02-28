@@ -79,7 +79,7 @@ const NormalNav = () => {
         <Link href="/about">
           <a
             className={cn('header-link', {
-              selected: route.startsWith('/about'),
+              selected: route.startsWith('/about') || route.startsWith('/team') || route.startsWith('/partner') || route.startsWith('/devices'),
             })}
           >
             <div>关于我们</div>
