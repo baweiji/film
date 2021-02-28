@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useMeasure } from 'react-use'
+import { useMeasure, useWindowSize } from 'react-use'
 import Layout from '../layouts/basic';
 import { Text, Grid, Row, Col, Card, Spacer, useMediaQuery, Divider } from '@geist-ui/react';
 import styles from '../styles/about.module.css';
@@ -31,11 +31,20 @@ const About = (props) => {
   const [ref, { width }] = useMeasure();
   const router = useRouter();
   const [height, setHeight] = useState('auto')
-
+  const [contentHeight, setContentHeight] = useState('auto')
+  const size = useWindowSize()
 
   useEffect(() => {
     setHeight(width * 2 / 3)
   }, [width])
+
+  useEffect(() => {
+    if (size.width > 900) {
+      setContentHeight('calc(100vh - 126px)')
+    } else {
+      setContentHeight('auto')
+    }
+  }, [size.width])
 
   const handleClick = (item) => {
     console.log(item)
@@ -44,8 +53,7 @@ const About = (props) => {
 
   return (
     <>
-      <div className={cn(styles.pageBg, styles.page)}>
-        <div className={cn(styles.pageBgMasker)}></div>
+      <div className={cn(styles.pageBg, styles.page)} style={{ height: contentHeight }}>
         <div className={styles.title}>
           <Text h3 className={styles.margin0}>我们的优势</Text>
           <div className={styles.divider}>
@@ -63,7 +71,7 @@ const About = (props) => {
                         <img src={"/images/strengths/" + item.img}
                           height={height} style={{ objectFit: 'cover', display: 'block' }} />
                         <div className={cn(styles.padding16, styles.contentBg)} ref={ref}>
-                          <Text h3 className={styles.margin0}>
+                          <Text h3 className={cn(styles.margin0, styles.strengthsTitle)}>
                             {item.title}
                           </Text>
                           <Text className={styles.margin0}>

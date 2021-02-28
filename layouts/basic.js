@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Header from '../components/header';
@@ -38,7 +38,9 @@ const Layout = ({ children, meta = {} }) => {
     <section className="basic-container">
       <LayoutHeader meta={meta} />
       <Header />
-      <div className="container">{children}</div>
+      <div className="container">
+          {children}
+      </div>
       {/* <Footer /> */}
       <style jsx global>{`
         html {
@@ -104,8 +106,6 @@ const Layout = ({ children, meta = {} }) => {
 const FnBasicLayout = (Page) => {
   const BasicLayout = (props) => {
     const { user, title, auth } = props;
-    const router = useRouter();
-
     return (
       <Layout meta={{ title }}>
         <Page {...props}></Page>
