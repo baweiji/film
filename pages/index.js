@@ -15,8 +15,11 @@ const RATIO = 2.35
 
 const data = [
   { title: '超群国际企业宣传片', src: 'chaoqun.jpg', video: 'https://v.qq.com/x/page/y3221gdtzz6.html' },
-  { title: '无锡山水城抗疫纪录片', src: 'boyu.jpg', video: 'https://v.qq.com/x/page/l3221wd2625.html' },
-  // { title: '海事局新中国周年纪录片', src: 'haishiju.jpg', video: 'https://v.qq.com/x/page/i3220btipa3.html' }
+  { title: '博宇', src: 'boyu.jpg', video: '' },
+  { title: '海事局新中国周年纪录片', src: 'haishiju.jpg', video: 'https://v.qq.com/x/page/i3220btipa3.html' },
+  { title: '统战部《光》', src: 'guang.jpg', video: '' },
+  { title: '无锡羊尖镇文化宣传片故里羊尖', src: 'yanjiaqiao.jpg', video: 'https://v.qq.com/x/page/m3223gp1n6j.html' },
+  { title: '盐城联通反腐微电影', src: 'yancheng.jpg', video: 'https://v.qq.com/x/page/w32239nketb.html' },
 ]
 
 const Slides = (height = 'auto') => {
@@ -39,35 +42,48 @@ const Home = (props) => {
   const [slideHeight, setSlideHeight] = useState(width / RATIO)
   const [title, setTitle] = useState(data[0].title)
   const [playUrl, setPlayUrl] = useState(data[0].video)
+  const [contentHeight, setContentHeight] = useState('auto')
 
   useEffect(() => {
     setSlideHeight(width / RATIO)
+
+    if (width > 900) {
+      setContentHeight('calc(100vh - 126px)')
+    } else {
+      setContentHeight('auto')
+    }
   }, [width])
 
   return (
     <>
-      <Swiper
-        width={width}
-        height={slideHeight}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        autoHeight
-        navigation
-        //loop
-        pagination={{ clickable: true }}
-        onSlideChange={(swiper) => {
-          setTitle(data[(swiper.activeIndex) % 2].title)
-          setPlayUrl(data[(swiper.activeIndex) % 2].video)
-        }}
-      // onSwiper={(swiper) => console.log(swiper)}
-      >
-        {Slides(slideHeight)}
-        <div className={styles.title}>
-          <span>{title}</span>
-          <span className={styles.playIcon}>
-            <Link href={playUrl} target="_blank" style={{alignItems:'center'}}><PlayCircle size={20}></PlayCircle>&nbsp;播放花絮</Link>
-          </span>
-        </div>
-      </Swiper>
+      <div className={styles.page} style={{ height: contentHeight }}>
+        <Swiper
+          width={width}
+          height={slideHeight}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          autoHeight
+          navigation
+          //loop
+          pagination={{ clickable: true }}
+          onSlideChange={(swiper) => {
+            setTitle(data[(swiper.activeIndex) % 6].title)
+            setPlayUrl(data[(swiper.activeIndex) % 6].video)
+          }}
+        // onSwiper={(swiper) => console.log(swiper)}
+        >
+          {Slides(slideHeight)}
+          <div className={styles.title}>
+            <span>{title}</span>
+            {playUrl &&
+              <span className={styles.playIcon}>
+                <Link href={playUrl} target="_blank" style={{ alignItems: 'center' }}>
+                  <PlayCircle size={20}></PlayCircle>&nbsp;播放花絮
+            </Link>
+              </span>
+            }
+          </div>
+        </Swiper>
+      </div>
     </>
   );
 };

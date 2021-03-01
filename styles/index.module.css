@@ -31,3 +31,7 @@
 .playIcon:hover{
     opacity: 1;
 }
+
+.page{
+    background-color: #000;
+}
