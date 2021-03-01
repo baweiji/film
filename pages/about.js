@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useMeasure, useWindowSize } from 'react-use'
 import Layout from '../layouts/basic';
-import { Text, Grid, Row, Col, Card, Spacer, useMediaQuery, Divider } from '@geist-ui/react';
+import { Text, Grid, Row, Col, Card, Spacer, Divider } from '@geist-ui/react';
 import styles from '../styles/about.module.css';
 import { useEffect, useState } from 'react';
 import cn from 'classnames'

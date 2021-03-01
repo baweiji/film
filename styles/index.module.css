@@ -35,3 +35,29 @@
 .page{
     background-color: #000;
 }
+
+.horizonItem{
+    margin:1rem 0;    
+}
+
+.horizonItemTitle{
+    position: absolute;
+    bottom:0;
+    width:100%;
+    color:#fff;
+    background:linear-gradient(hsla(0,0%,100%,0),#000 80%);
+    height: 2rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+    z-index: 2;
+}
+
+.horizonItemPlayIcon{
+    color:#eb6100;
+    margin-left:1rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    line-height: 0;
+    font-weight: 500;
+}

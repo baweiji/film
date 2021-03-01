@@ -5,9 +5,9 @@ import SwiperCore, { Navigation, Pagination, Autoplay, A11y } from 'swiper';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from '../styles/index.module.css'
-import { Link } from '@geist-ui/react'
+import { Link, useMediaQuery } from '@geist-ui/react'
 import PlayCircle from '@geist-ui/react-icons/playCircle'
-
+import cn from 'classnames'
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Autoplay, A11y]);
 
@@ -43,49 +43,78 @@ const Home = (props) => {
   const [title, setTitle] = useState(data[0].title)
   const [playUrl, setPlayUrl] = useState(data[0].video)
   const [contentHeight, setContentHeight] = useState('auto')
+  const [mode, setMode] = useState(0)
 
   useEffect(() => {
     setSlideHeight(width / RATIO)
-
     if (width > 900) {
       setContentHeight('calc(100vh - 126px)')
+      setMode(0)
     } else {
       setContentHeight('auto')
+      setMode(1)
     }
   }, [width])
 
-  return (
-    <>
-      <div className={styles.page} style={{ height: contentHeight }}>
-        <Swiper
-          width={width}
-          height={slideHeight}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          autoHeight
-          navigation
-          //loop
-          pagination={{ clickable: true }}
-          onSlideChange={(swiper) => {
-            setTitle(data[(swiper.activeIndex) % 6].title)
-            setPlayUrl(data[(swiper.activeIndex) % 6].video)
-          }}
-        // onSwiper={(swiper) => console.log(swiper)}
-        >
-          {Slides(slideHeight)}
-          <div className={styles.title}>
-            <span>{title}</span>
-            {playUrl &&
-              <span className={styles.playIcon}>
-                <Link href={playUrl} target="_blank" style={{ alignItems: 'center' }}>
-                  <PlayCircle size={20}></PlayCircle>&nbsp;播放花絮
+  if (mode === 0) {
+    return (
+      <>
+        <div className={styles.page} style={{ height: contentHeight }}>
+          <Swiper
+            width={width}
+            height={slideHeight}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            autoHeight
+            navigation
+            //loop
+            pagination={{ clickable: true }}
+            onSlideChange={(swiper) => {
+              setTitle(data[(swiper.activeIndex) % 6].title)
+              setPlayUrl(data[(swiper.activeIndex) % 6].video)
+            }}
+          // onSwiper={(swiper) => console.log(swiper)}
+          >
+            {Slides(slideHeight)}
+            <div className={styles.title}>
+              <span>{title}</span>
+              {playUrl &&
+                <span className={styles.playIcon}>
+                  <Link href={playUrl} target="_blank" style={{ alignItems: 'center' }}>
+                    <PlayCircle size={20}></PlayCircle>&nbsp;播放花絮
             </Link>
-              </span>
-            }
+                </span>
+              }
+            </div>
+          </Swiper>
+        </div>
+      </>
+    );
+  }
+
+  if (mode === 1) {
+    return <div className={styles.page}>
+      {
+        data.map(item => (
+          <div key={item.src} className={cn(styles.slide, styles.horizonItem)} style={{
+            width: '100%',
+            height: slideHeight,
+            backgroundImage: `url('/images/films/${item.src}')`
+          }} >
+            <div className={styles.horizonItemTitle}>
+              <span>{item.title}</span>
+              {item.video &&
+                <span className={styles.horizonItemPlayIcon}>
+                  <Link href={item.video} target="_blank" style={{ alignItems: 'center' }}>
+                    <PlayCircle size={16}></PlayCircle>&nbsp;花絮
+            </Link>
+                </span>
+              }
+            </div>
           </div>
-        </Swiper>
-      </div>
-    </>
-  );
+        ))
+      }
+    </div>
+  }
 };
 
 Home.getInitialProps = async (context) => {
