@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Image, useMediaQuery } from '@geist-ui/react';
+import { useMediaQuery } from '@geist-ui/react';
 import cn from 'classnames';
+import PhoneIcon from '@geist-ui/react-icons/phone'
+import MailIcon from '@geist-ui/react-icons/mail'
+
 
 const Logo = () => {
+  const upMD = useMediaQuery('md', { match: 'up' })
   const upXS = useMediaQuery('sm', { match: 'up' })
-  const height = upXS ? 70 : 32
-  const padding = upXS ? 0 : 8
+  const height = upMD ? 70 : (upXS ? 40 : 32)
+  const padding = upMD ? 0 : 8
 
   if (!process.browser) {
     return <></>
@@ -90,9 +94,12 @@ const NormalNav = () => {
         <span
           className={cn('header-link')}
           href="#contact"
-          style={{ width: 100 }}
+          style={{ width: 150 }}
         >
-          <div>联系电话: 13771196623</div>
+          <div className={'contacts'}>
+            <div><PhoneIcon size="14"></PhoneIcon> 13771196623</div>
+            <div><MailIcon size="14"></MailIcon> 4043408@qq.com</div>
+          </div>
           {/* <div className={'header-link-en-label'}>&nbsp;</div> */}
         </span>
       </div>
@@ -125,7 +132,16 @@ const NormalNav = () => {
           text-transform: uppercase;
         }
 
-        @media (max-width: 640px) {
+        .contacts{
+          font-size:.9rem;
+          text-align:left;
+        }
+
+        .contacts>div+div{
+          padding-top:4px
+        }
+
+        @media (max-width: 900px) {
           .logo {
             display: block;
           }
@@ -160,7 +176,7 @@ const Navbar = () => {
           margin: 0 auto;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 900px) {
           .navbar {
             height: auto;
             width: 100%;

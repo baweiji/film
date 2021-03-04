@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useWindowSize } from 'react-use'
 import Layout from '../layouts/basic';
-import SwiperCore, { Navigation, Pagination, Autoplay, A11y } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Autoplay, A11y, Mousewheel, Lazy } from 'swiper';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from '../styles/index.module.css'
@@ -9,17 +9,17 @@ import { Link, useMediaQuery } from '@geist-ui/react'
 import PlayCircle from '@geist-ui/react-icons/playCircle'
 import cn from 'classnames'
 // install Swiper components
-SwiperCore.use([Navigation, Pagination, Autoplay, A11y]);
+SwiperCore.use([Navigation, Pagination, Autoplay, A11y, Mousewheel, Lazy]);
 
 const RATIO = 2.35
 
 const data = [
   { title: '超群国际企业宣传片', src: 'chaoqun.jpg', video: 'https://v.qq.com/x/page/y3221gdtzz6.html' },
-  { title: '博宇', src: 'boyu.jpg', video: '' },
+  { title: '博宇塑机生产线广告', src: 'boyu.jpg', video: '' },
   { title: '海事局新中国周年纪录片', src: 'haishiju.jpg', video: 'https://v.qq.com/x/page/i3220btipa3.html' },
-  { title: '统战部《光》', src: 'guang.jpg', video: '' },
-  { title: '无锡羊尖镇文化宣传片故里羊尖', src: 'yanjiaqiao.jpg', video: 'https://v.qq.com/x/page/m3223gp1n6j.html' },
-  { title: '盐城联通反腐微电影', src: 'yancheng.jpg', video: 'https://v.qq.com/x/page/w32239nketb.html' },
+  { title: '统战部优秀人物纪录片《光》', src: 'guang.jpg', video: '' },
+  { title: '香港政务司司长唐英年旧居纪录片', src: 'yanjiaqiao.jpg', video: 'https://v.qq.com/x/page/m3223gp1n6j.html' },
+  { title: '盐城纪委反腐微电影', src: 'yancheng.jpg', video: 'https://v.qq.com/x/page/w32239nketb.html' },
 ]
 
 const Slides = (height = 'auto') => {
@@ -44,6 +44,7 @@ const Home = (props) => {
   const [playUrl, setPlayUrl] = useState(data[0].video)
   const [contentHeight, setContentHeight] = useState('auto')
   const [mode, setMode] = useState(0)
+  const [swiper, setSwiper] = useState()
 
   useEffect(() => {
     setSlideHeight(width / RATIO)
@@ -59,8 +60,16 @@ const Home = (props) => {
   if (mode === 0) {
     return (
       <>
-        <div className={styles.page} style={{ height: contentHeight }}>
+        <div className={styles.page} style={{ height: contentHeight }}
+          onMouseEnter={() => {
+            swiper.autoplay.stop();
+          }}
+          onMouseLeave={() => {
+            swiper.autoplay.start();
+          }}>
           <Swiper
+            onSwiper={setSwiper}
+            lazy
             width={width}
             height={slideHeight}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
@@ -72,6 +81,7 @@ const Home = (props) => {
               setTitle(data[(swiper.activeIndex) % 6].title)
               setPlayUrl(data[(swiper.activeIndex) % 6].video)
             }}
+
           // onSwiper={(swiper) => console.log(swiper)}
           >
             {Slides(slideHeight)}

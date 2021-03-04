@@ -52,7 +52,7 @@ const OTHER_ENTERPRISE_DATA = [
 const Enterprises = ({ data }) => {
   return ENTERPRISE_DATA.map((group, index) => {
     return (
-      <Grid.Container key={index} gap={3} justify="space-between" style={{ marginBottom: '18px' }}>
+      <Grid.Container key={index} gap={2} justify="space-between" style={{ marginBottom: '18px' }}>
         {
           group.map((item, subIndex) => {
             return item.src &&
@@ -60,7 +60,7 @@ const Enterprises = ({ data }) => {
                 <Card hoverable >
                   <img src={"/images/enterprises/" + item.src}
                     height={item.height} style={{ objectFit: 'scale-down' }} />
-                  <div style={{ textAlign: "center", marginTop: 8, fontSize: '1rem' }}>{item.name}</div>
+                  <div style={{ textAlign: "center", marginTop: 8, fontSize: '0.9rem' }}>{item.name}</div>
                 </Card>
               </Grid>
           })

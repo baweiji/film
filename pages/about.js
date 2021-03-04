@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useMeasure, useWindowSize } from 'react-use'
 import Layout from '../layouts/basic';
-import { Text, Grid, Row, Col, Card, Spacer, Divider } from '@geist-ui/react';
+import { Text, Grid, Row, Col, Card, Spacer, Divider,useMediaQuery } from '@geist-ui/react';
 import styles from '../styles/about.module.css';
 import { useEffect, useState } from 'react';
 import cn from 'classnames'
@@ -32,22 +32,23 @@ const About = (props) => {
   const router = useRouter();
   const [height, setHeight] = useState('auto')
   const [contentHeight, setContentHeight] = useState('auto')
-  const size = useWindowSize()
+
+  const upMD = useMediaQuery('md', { match: 'up' })
 
   useEffect(() => {
     setHeight(width * 2 / 3)
   }, [width])
 
   useEffect(() => {
-    if (size.width > 900) {
+    //console.log(size)
+    if (upMD) {
       setContentHeight('calc(100vh - 126px)')
     } else {
       setContentHeight('auto')
     }
-  }, [size.width])
+  }, [upMD])
 
   const handleClick = (item) => {
-    console.log(item)
     router.push(item.href)
   }
 
