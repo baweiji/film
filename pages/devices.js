@@ -3,7 +3,7 @@ import { useWindowSize } from 'react-use'
 // import { Page, Text, Card, Note, Code, Spacer, Button, Grid } from '@geist-ui/react';
 // import { useRouter } from 'next/router';
 import Layout from '../layouts/basic';
-
+import styles from '../styles/device.module.css'
 import SwiperCore, { Navigation, Pagination, Autoplay, A11y } from 'swiper';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -43,33 +43,58 @@ const Slides = (height) => {
   ))
 }
 
-const Home = (props) => {
-  const { width } = useWindowSize();
-  const [slideHeight, setSlideHeight] = useState(width / RATIO)
-  useEffect(() => {
-    setSlideHeight(width / RATIO)
-  }, [width])
+{/* <Swiper
+  width={width}
+  height={slideHeight}
+  autoplay={{ delay: 5000, disableOnInteraction: false }}
+  navigation
+  pagination={{ clickable: true }}
+>
+  {Slides(slideHeight)}
+</Swiper> */}
 
+const Display = ({ width, height }) => {
+
+  return (
+    <div style={{
+      width: '100%',
+      height: height,
+      background: `url('/images/devices/black.jpg') no-repeat rgb(0, 0, 0)`,
+      backgroundSize: 'contain',
+      backgroundPosition: 'center'
+    }}>
+    </div>
+  )
+}
+
+const Devices = (props) => {
+  const { width } = useWindowSize();
+  const [slideHeight, setSlideHeight] = useState(0)
+  const [contentHeight, setContentHeight] = useState('auto')
+
+  useEffect(() => {
+    console.log(width)
+    setSlideHeight(width / RATIO)
+    if (width > 900) {
+      setContentHeight('calc(100vh - 126px)')
+      //setMode(0)
+    } else {
+      setContentHeight('auto')
+      //setMode(1)
+    }
+  }, [width])
 
   return (
     <>
-      <Swiper
-        width={width}
-        height={slideHeight}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        navigation
-        pagination={{ clickable: true }}
-        // onSlideChange={() => console.log('slide change')}
-        // onSwiper={(swiper) => console.log(swiper)}
-      >
-        {Slides(slideHeight)}
-      </Swiper>
+      <div className={styles.page} style={{ width: width, height: contentHeight }} >
+        <Display height={slideHeight} />
+      </div>
     </>
   );
 };
 
-Home.getInitialProps = async (context) => {
+Devices.getInitialProps = async (context) => {
   return { title: '专业设备' };
 };
 
-export default Layout(Home);
+export default Layout(Devices);
