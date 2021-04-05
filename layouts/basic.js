@@ -8,8 +8,9 @@ import config from '../config';
 const LayoutHeader = ({ meta }) => (
   <Head>
     <title>{meta.title ? `${meta.title} - ${config.site.title}` : `${config.site.title}`}</title>
-    {meta.description && <meta name="description" content={meta.description} />}
-    {meta.description && <meta property="og:description" content={meta.description} />}
+    {config.site.description && <meta name="description" content={config.site.description} />}
+    {meta.description && <meta property="og:description" content={config.site.description} />}
+    {config.site.keywords && <meta property="keywords" content={config.site.keywords}/>}
     {meta.title && <meta property="og:title" content={meta.title} />}
     {meta.image && <meta property="og:image" content={meta.image} />}
     {meta.image && <meta property="twitter:image" content={meta.image} />}
