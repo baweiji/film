@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useWindowSize } from 'react-use'
-// import { Page, Text, Card, Note, Code, Spacer, Button, Grid } from '@geist-ui/react';
+import { useMediaQuery } from '@geist-ui/react';
 // import { useRouter } from 'next/router';
 import Layout from '../layouts/basic';
 import styles from '../styles/device.module.css'
@@ -53,17 +53,18 @@ const Slides = (height) => {
   {Slides(slideHeight)}
 </Swiper> */}
 
-const Display = ({ width, height }) => {
+const Display = ({ background, height }) => {
 
   return (
-    <div style={{
-      width: '100%',
-      height: height,
-      background: `url('/images/devices/black.jpg') no-repeat rgb(0, 0, 0)`,
-      backgroundSize: 'contain',
-      backgroundPosition: 'center'
-    }}>
-    </div>
+    // <div style={{
+    //   width: '100%',
+    //   height: height,
+    //   backgroundImage: `url('${background}') no-repeat rgb(0, 0, 0)`,
+    //   backgroundSize: 'contain',
+    //   backgroundPosition: 'center'
+    // }}>
+    // </div>
+    <img src={background} width='100%'></img>
   )
 }
 
@@ -71,23 +72,25 @@ const Devices = (props) => {
   const { width } = useWindowSize();
   const [slideHeight, setSlideHeight] = useState(0)
   const [contentHeight, setContentHeight] = useState('auto')
+  const [backgroundImage, setBackgroundImage] = useState('/images/devices/black-pc.jpg')
+
+  const upMD = useMediaQuery('md', { match: 'up' })
 
   useEffect(() => {
-    console.log(width)
-    setSlideHeight(width / RATIO)
-    if (width > 900) {
+    //setSlideHeight(width / RATIO)
+    if (upMD) {
       setContentHeight('calc(100vh - 126px)')
-      //setMode(0)
+      setBackgroundImage('/images/devices/black-pc.jpg')
     } else {
       setContentHeight('auto')
-      //setMode(1)
+      setBackgroundImage('/images/devices/black-mobile.jpg')
     }
-  }, [width])
+  }, [upMD])
 
   return (
     <>
-      <div className={styles.page} style={{ width: width, height: contentHeight }} >
-        <Display height={slideHeight} />
+      <div className={styles.page} style={{ width: '100%', height: contentHeight }} >
+        <Display background={backgroundImage} />
       </div>
     </>
   );
